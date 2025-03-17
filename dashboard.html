@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Ticket Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="dashboard-body">
+    <nav class="dashboard-nav">
+        <div class="nav-logo">
+            <i class="fas fa-ticket-alt"></i>
+            <span>Ticket Management</span>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a>
+            <a href="#"><i class="fas fa-chart-bar"></i> Analytics</a>
+            <a href="#"><i class="fas fa-cog"></i> Settings</a>
+        </div>
+        <div class="nav-user">
+            <span class="user-name">John Doe</span>
+            <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Ticket Management Dashboard</h1>
+            <button class="create-btn" id="showFormBtn"><i class="fas fa-plus"></i> New Ticket</button>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-tasks"></i></div>
+                <div class="stat-info">
+                    <h3>Total Tickets</h3>
+                    <p id="totalTickets">0</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-spinner"></i></div>
+                <div class="stat-info">
+                    <h3>In Progress</h3>
+                    <p id="inProgressTickets">0</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-info">
+                    <h3>Resolved</h3>
+                    <p id="resolvedTickets">0</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                <div class="stat-info">
+                    <h3>Avg. Resolution</h3>
+                    <p>2.4 days</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="ticket-form-container" id="ticketFormContainer">
+            <div class="ticket-form">
+                <div class="form-header">
+                    <h3>Create New Ticket</h3>
+                    <button id="closeFormBtn"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="form-group">
+                    <label for="customerName">Customer Name</label>
+                    <input type="text" id="customerName" placeholder="Enter customer name" required>
+                </div>
+                <div class="form-group">
+                    <label for="ticketTitle">Ticket Title</label>
+                    <input type="text" id="ticketTitle" placeholder="Enter ticket title" required>
+                </div>
+                <div class="form-group">
+                    <label for="ticketDescription">Description</label>
+                    <textarea id="ticketDescription" placeholder="Enter ticket description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ticketPriority">Priority</label>
+                    <select id="ticketPriority">
+                        <option value="Low">Low</option>
+                        <option value="Medium" selected>Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ticketStatus">Status</label>
+                    <select id="ticketStatus">
+                        <option value="Assigned">Assigned</option>
+                        <option value="In Process">In Process</option>
+                        <option value="Resolved">Resolved</option>
+                        <option value="Deployed">Deployed</option>
+                    </select>
+                </div>
+                <button class="submit-btn" onclick="createTicket()">Create Ticket</button>
+            </div>
+        </div>
+
+        <div class="board-container">
+            <div class="board-header">
+                <h2>Ticket Board</h2>
+                <div class="board-actions">
+                    <select id="filterStatus" onchange="filterTickets()">
+                        <option value="All">All Statuses</option>
+                        <option value="Assigned">Assigned</option>
+                        <option value="In Process">In Process</option>
+                        <option value="Resolved">Resolved</option>
+                        <option value="Deployed">Deployed</option>
+                    </select>
+                    <button class="refresh-btn" onclick="loadTickets()"><i class="fas fa-sync-alt"></i> Refresh</button>
+                </div>
+            </div>
+
+            <div class="ticket-sections">
+                <div class="ticket-column" id="Assigned" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <h3><i class="fas fa-clipboard-list"></i> Assigned</h3>
+                    <div class="column-content"></div>
+                </div>
+                <div class="ticket-column" id="In Process" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <h3><i class="fas fa-spinner"></i> In Process</h3>
+                    <div class="column-content"></div>
+                </div>
+                <div class="ticket-column" id="Resolved" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <h3><i class="fas fa-check-circle"></i> Resolved</h3>
+                    <div class="column-content"></div>
+                </div>
+                <div class="ticket-column" id="Deployed" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <h3><i class="fas fa-rocket"></i> Deployed</h3>
+                    <div class="column-content"></div>
+                </div>
+                <div class="ticket-column closed" id="Closed">
+                    <h3><i class="fas fa-archive"></i> Closed</h3>
+                    <div class="column-content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
