@@ -104,9 +104,9 @@ window.onload = function () {
 // Check if user is logged in
 function checkAuth() {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
-    if (!isLoggedIn && !window.location.href.includes('login.html')) {
-        window.location.href = 'login.html';
-    } else if (isLoggedIn && window.location.href.includes('login.html')) {
+    if (!isLoggedIn && !window.location.href.includes('index.html')) {
+        window.location.href = 'index.html';
+    } else if (isLoggedIn && window.location.href.includes('index.html')) {
         window.location.href = 'dashboard.html';
     }
 }
